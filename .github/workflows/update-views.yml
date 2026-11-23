@@ -1,0 +1,50 @@
+name: Update views
+
+on:
+  schedule:
+    - cron: "7 * * * *"        # every hour, at minute 7 (UTC)
+  workflow_dispatch: {}          # "Run workflow" button for a manual refresh
+  push:
+    paths:
+      - data/manual.json         # Snapchat numbers entered by hand
+      - config.json
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-views
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch views from platforms
+        env:
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          YT_API_KEY: ${{ secrets.YT_API_KEY }}
+          YT_CHANNEL_ID: ${{ secrets.YT_CHANNEL_ID }}
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+        run: python scripts/fetch.py
+
+      - name: Commit updated numbers
+        run: |
+          git config user.name "views-bot"
+          git config user.email "views-bot@users.noreply.github.com"
+          git add data/store.json docs/data/views.json
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Update views $(date -u +%Y-%m-%dT%H:%MZ)"
+            git push
+          fi
