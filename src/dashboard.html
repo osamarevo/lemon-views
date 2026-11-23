@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>المشاهدات المضمونة | ليمون</title>
+<meta name="description" content="عداد مباشر لمشاهدات حملة ليمون، والأرقام من المنصات نفسها.">
+<meta name="theme-color" content="#10231F">
+<style>
+/*FONTS*/
+:root{
+  --ink:#10231F;--ink2:#17302A;--line:rgba(247,255,208,.14);
+  --green:#0B714C;--pink:#FFD2FC;--cream:#F7FFD0;--orange:#FA7928;--blue:#5170FF;--lime:#CDE846;--paper:#FCF2DB;
+  --muted:rgba(247,255,208,.62);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--ink)}
+body{font-family:"TS",system-ui,sans-serif;color:var(--cream);background:var(--ink);min-height:100vh;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 16px 0}
+.num{font-feature-settings:"tnum" 1;direction:ltr;unicode-bidi:isolate}
+
+/* header */
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 0 18px}
+header img{height:34px;width:auto}
+.live{display:inline-flex;align-items:center;gap:8px;font:700 14px/1 "TS";background:rgba(250,121,40,.14);
+  color:var(--orange);padding:9px 14px;border-radius:999px;white-space:nowrap}
+.live i{width:9px;height:9px;border-radius:50%;background:var(--orange);animation:pulse 1.6s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(250,121,40,.7)}70%{box-shadow:0 0 0 10px rgba(250,121,40,0)}100%{box-shadow:0 0 0 0 rgba(250,121,40,0)}}
+.demo{display:none;margin:0 0 14px;background:var(--pink);color:var(--ink);font:700 14px/1.4 "TS";padding:10px 14px;border-radius:14px}
+.is-demo .demo{display:block}
+
+/* hero */
+.hero{position:relative;border-radius:32px;padding:30px 22px 26px;background:var(--ink2);overflow:hidden}
+.hero:before{content:"";position:absolute;inset:auto -60px -120px auto;width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle,rgba(205,232,70,.18),transparent 70%)}
+.kicker{font:700 15px/1.3 "TS";color:var(--orange);letter-spacing:.01em}
+.title{font:900 30px/1.15 "TD";color:var(--pink);margin-top:6px}
+.count{font:900 clamp(64px,17vw,190px)/1 "TD";color:var(--lime);margin-top:22px;letter-spacing:-.01em;text-align:right}
+.unit{font:700 20px/1 "TS";color:var(--cream);margin-top:10px}
+.bar{height:18px;border-radius:999px;background:rgba(247,255,208,.1);margin-top:26px;overflow:hidden}
+.bar b{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--lime),#E7F58C);
+  transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+.barlbl{display:flex;justify-content:space-between;gap:10px;margin-top:12px;font:500 15px/1.4 "TS";color:var(--muted)}
+.barlbl strong{color:var(--cream);font-weight:700}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}
+.stat{background:var(--ink2);border-radius:22px;padding:18px 18px 16px}
+.stat b{display:block;font:900 34px/1 "TD";color:var(--cream)}
+.stat span{display:block;font:500 14px/1.35 "TS";color:var(--muted);margin-top:8px}
+.stat.hl{background:var(--lime);color:var(--ink)}.stat.hl b{color:var(--green)}.stat.hl span{color:rgba(16,35,31,.75)}
+
+/* cards */
+.card{background:var(--ink2);border-radius:28px;padding:22px 18px;margin-top:14px}
+.card h2{font:900 24px/1.2 "TD";color:var(--cream);display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.card h2 small{font:500 13px/1.3 "TS";color:var(--muted)}
+.chart{margin-top:16px;width:100%;height:auto;display:block;direction:ltr}
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin-top:10px;font:500 13px/1 "TS";color:var(--muted)}
+.legend i{display:inline-block;width:18px;height:4px;border-radius:2px;margin-left:6px;vertical-align:middle}
+
+/* top posts */
+.posts{list-style:none;margin-top:12px}
+.posts li{border-top:1px solid var(--line)}
+.posts li:first-child{border-top:0}
+.posts a{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:center;padding:14px 2px}
+.rank{font:900 22px/1 "TD";color:var(--muted);text-align:center}
+.pt{min-width:0}
+.pt p{font:500 15px/1.4 "TS";white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--cream)}
+.chip{display:inline-block;font:700 12px/1 "TS";padding:5px 9px;border-radius:999px;margin-top:6px;color:var(--ink)}
+.c-instagram{background:var(--pink)}.c-tiktok{background:var(--lime)}.c-youtube{background:var(--orange)}.c-snapchat{background:var(--cream)}
+.pv{font:900 20px/1 "TD";color:var(--lime);text-align:left}
+.empty{font:500 15px/1.6 "TS";color:var(--muted);padding:14px 0 4px}
+
+footer{margin:22px 0 0;padding:22px 0 40px;border-top:1px solid var(--line);font:500 14px/1.7 "TS";color:var(--muted)}
+footer strong{color:var(--cream)}
+.scallop{height:30px;background:radial-gradient(circle at 20px 0,transparent 19px,var(--paper) 20px) 0 0/40px 30px repeat-x}
+
+@media (min-width:760px){
+  .wrap{padding:34px 32px 0}
+  header img{height:46px}
+  .hero{padding:48px 48px 40px;border-radius:40px}
+  .title{font-size:44px}
+  .unit{font-size:26px}
+  .barlbl{font-size:18px}
+  .stats{grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px}
+  .stat{padding:24px 24px 20px}.stat b{font-size:44px}.stat span{font-size:16px}
+  .grid2{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;margin-top:16px}
+  .grid2 .card{margin-top:0}
+  .card{padding:30px 30px 26px}
+  .card h2{font-size:30px}
+}
+@media (prefers-reduced-motion:reduce){.live i{animation:none}.bar b{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img src="assets/logo.png" alt="Lemon Productions">
+    <span class="live"><i></i><span id="updated">مباشر</span></span>
+  </header>
+
+  <div class="demo">بيانات تجريبية للمعاينة فقط، وليست أرقام الحملة الحقيقية.</div>
+
+  <section class="hero">
+    <p class="kicker">عداد حملة ليمون المباشر</p>
+    <h1 class="title" id="name">المشاهدات المضمونة</h1>
+    <div class="count num" id="count">0</div>
+    <p class="unit">مشاهدة</p>
+    <div class="bar"><b id="bar"></b></div>
+    <div class="barlbl"><span>الهدف: <strong class="num" id="target">—</strong> مشاهدة</span><span><strong class="num" id="pct">0%</strong></span></div>
+  </section>
+
+  <section class="stats">
+    <div class="stat"><b class="num" id="day">—</b><span id="dayLbl">يوم الحملة</span></div>
+    <div class="stat"><b class="num" id="left">—</b><span>يوم باقي</span></div>
+    <div class="stat"><b class="num" id="today">—</b><span>مشاهدة اليوم</span></div>
+    <div class="stat hl"><b class="num" id="need">—</b><span>المطلوب يومياً للوصول</span></div>
+  </section>
+
+  <div class="grid2">
+    <section class="card">
+      <h2>النمو اليومي <small>تراكمي</small></h2>
+      <svg class="chart" id="chart" viewBox="0 0 640 400" role="img" aria-label="رسم بياني لنمو المشاهدات"></svg>
+      <div class="legend"><span><i style="background:var(--lime)"></i>المشاهدات</span><span><i style="background:repeating-linear-gradient(90deg,var(--pink) 0 5px,transparent 5px 9px)"></i>المسار المطلوب للهدف</span></div>
+    </section>
+    <section class="card">
+      <h2>الأكثر مشاهدة</h2>
+      <ul class="posts" id="posts"></ul>
+    </section>
+  </div>
+
+  <footer>
+    <strong>الأرقام مو منّا… من المنصة نفسها.</strong>
+    تُسحب المشاهدات (Views) آلياً كل ساعة من انستغرام ويوتيوب<span id="ttNote"></span>، ومشاهدات سناب شات تُضاف يدوياً من لوحة المنصة.
+    يُحسب فقط المحتوى المنشور من بداية الحملة.
+  </footer>
+</div>
+<div class="scallop"></div>
+
+<script>
+(function(){
+  var PLAT = {instagram:"انستغرام", tiktok:"تيك توك", youtube:"يوتيوب", snapchat:"سناب شات"};
+  var TYPE = {reel:"ريل", story:"ستوري", post:"منشور", carousel_album:"كاروسيل", short:"شورتس", video:"فيديو", spotlight:"سبوتلايت"};
+  var shown = 0, data = null;
+  var fmt = function(n){ return Math.round(n).toLocaleString("en-US"); };
+  var $ = function(id){ return document.getElementById(id); };
+
+  function animate(to){
+    var from = shown, t0 = performance.now(), dur = Math.min(2200, 600 + Math.abs(to-from)/400);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) dur = 1;
+    (function step(t){
+      var k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
+      shown = from + (to-from)*e;               // never passes the real number
+      $("count").textContent = fmt(shown);
+      if (k < 1) requestAnimationFrame(step); else shown = to;
+    })(t0);
+  }
+
+  function ago(iso){
+    var m = Math.max(0, Math.round((Date.now() - new Date(iso).getTime())/60000));
+    if (m < 1) return "تحديث الآن";
+    if (m < 60) return "آخر تحديث قبل " + m + " دقيقة";
+    var h = Math.round(m/60);
+    return "آخر تحديث قبل " + h + (h === 1 ? " ساعة" : " ساعات");
+  }
+
+  function dayIndex(c){
+    var start = new Date(c.start + "T00:00:00+03:00").getTime();
+    return Math.floor((Date.now() - start)/86400000) + 1;   // 1-based, Kuwait time
+  }
+
+  function render(d){
+    data = d;
+    var c = d.campaign, total = d.total, target = c.target;
+    document.body.classList.toggle("is-demo", !!d.demo);
+    $("name").textContent = c.name || "المشاهدات المضمونة";
+    $("target").textContent = fmt(target);
+    var pct = Math.min(100, total/target*100);
+    $("pct").textContent = (pct >= 10 ? Math.floor(pct) : pct.toFixed(1)) + "%";
+    $("bar").style.width = pct + "%";
+    animate(total);
+
+    var day = dayIndex(c);
+    if (day < 1){
+      $("day").textContent = String(1-day); $("dayLbl").textContent = "يوم على انطلاق الحملة";
+      $("left").textContent = String(c.days);
+    } else {
+      var shownDay = Math.min(day, c.days);
+      $("day").textContent = shownDay + "/" + c.days; $("dayLbl").textContent = "يوم الحملة";
+      $("left").textContent = String(Math.max(0, c.days - shownDay));
+    }
+    var h = d.history || [];
+    var last = h.length ? h[h.length-1].total : 0, prev = h.length > 1 ? h[h.length-2].total : 0;
+    $("today").textContent = h.length ? fmt(last - prev) : "0";
+    var daysLeft = Math.max(1, c.days - Math.max(0, day) + 1);
+    $("need").textContent = total >= target ? "تم ✓" : fmt((target-total)/daysLeft);
+
+    $("ttNote").textContent = d.platforms && d.platforms.tiktok !== undefined ? " وتيك توك" : "";
+    if (d.updated) $("updated").textContent = ago(d.updated);
+    drawChart(h, c);
+    drawPosts(d.top || []);
+  }
+
+  function drawChart(h, c){
+    var W=640,H=400,L=58,R=16,T=18,B=34, svg=$("chart");
+    var maxY = Math.max(c.target, h.length ? h[h.length-1].total : 0) * 1.05;
+    var x = function(day){ return L + (day-1)/(c.days-1)*(W-L-R); };
+    var y = function(v){ return T + (1 - v/maxY)*(H-T-B); };
+    var s = "";
+    [0,.25,.5,.75,1].forEach(function(f){
+      var v = c.target*f, yy = y(v);
+      s += '<line x1="'+L+'" x2="'+(W-R)+'" y1="'+yy+'" y2="'+yy+'" stroke="rgba(247,255,208,.1)"/>';
+      s += '<text x="'+(L-10)+'" y="'+(yy+4)+'" text-anchor="end" fill="rgba(247,255,208,.55)" font-size="12" font-family="TS">'+(v>=1e6?(v/1e6)+"M":v>=1e3?(v/1e3)+"K":v)+'</text>';
+    });
+    [1,10,20,c.days].forEach(function(dd){
+      s += '<text x="'+x(dd)+'" y="'+(H-10)+'" text-anchor="middle" fill="rgba(247,255,208,.55)" font-size="12" font-family="TS">'+(dd===1?"يوم 1":dd)+'</text>';
+    });
+    s += '<line x1="'+x(1)+'" y1="'+y(0)+'" x2="'+x(c.days)+'" y2="'+y(c.target)+'" stroke="#FFD2FC" stroke-width="2.5" stroke-dasharray="7 6" opacity=".8"/>';
+    var start = new Date(c.start + "T00:00:00+03:00").getTime();
+    var pts = h.map(function(p){
+      var dd = Math.round((new Date(p.date + "T12:00:00+03:00").getTime() - start)/86400000) + 1;
+      return [x(Math.min(Math.max(dd,1),c.days)), y(p.total)];
+    });
+    if (pts.length){
+      var line = pts.map(function(p,i){ return (i?"L":"M")+p[0].toFixed(1)+" "+p[1].toFixed(1); }).join(" ");
+      s += '<defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#CDE846" stop-opacity=".35"/><stop offset="1" stop-color="#CDE846" stop-opacity="0"/></linearGradient></defs>';
+      s += '<path d="'+line+' L'+pts[pts.length-1][0].toFixed(1)+' '+y(0)+' L'+pts[0][0].toFixed(1)+' '+y(0)+' Z" fill="url(#g)"/>';
+      s += '<path d="'+line+'" fill="none" stroke="#CDE846" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>';
+      var e = pts[pts.length-1];
+      s += '<circle cx="'+e[0]+'" cy="'+e[1]+'" r="7" fill="#CDE846" stroke="#10231F" stroke-width="3"/>';
+    }
+    svg.innerHTML = s;
+  }
+
+  function esc(t){ return String(t).replace(/[&<>"]/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch];}); }
+
+  function drawPosts(top){
+    if (!top.length){ $("posts").innerHTML = '<li class="empty">أول المنشورات بتظهر هني بعد انطلاق الحملة.</li>'; return; }
+    $("posts").innerHTML = top.map(function(p,i){
+      var title = p.title || (TYPE[p.type] || "منشور") + " على " + (PLAT[p.platform] || p.platform);
+      var tag = p.url ? 'a href="'+esc(p.url)+'" target="_blank" rel="noopener"' : 'a';
+      return '<li><'+tag+'><span class="rank">'+(i+1)+'</span><span class="pt"><p>'+esc(title)+'</p>'+
+        '<span class="chip c-'+esc(p.platform)+'">'+(PLAT[p.platform]||esc(p.platform))+(TYPE[p.type]?" · "+TYPE[p.type]:"")+'</span></span>'+
+        '<span class="pv num">'+fmt(p.views)+'</span></a></li>';
+    }).join("");
+  }
+
+  function load(){
+    fetch("data/views.json?ts=" + Date.now(), {cache:"no-store"})
+      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+      .then(render)
+      .catch(function(){ $("updated").textContent = "تعذّر التحديث"; });
+  }
+  load();
+  setInterval(load, 5*60*1000);
+  setInterval(function(){ if (data && data.updated) $("updated").textContent = ago(data.updated); }, 60*1000);
+})();
+</script>
+</body>
+</html>

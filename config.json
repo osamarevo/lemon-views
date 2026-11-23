@@ -1,0 +1,16 @@
+{
+  "campaign": {
+    "name": "المشاهدات المضمونة",
+    "start": "2026-12-01",
+    "days": 30,
+    "target": 1000000
+  },
+  "utc_offset_hours": 3,
+  "platforms": {
+    "instagram": { "enabled": true, "host": "graph.facebook.com", "api_version": "v23.0", "include_stories": true },
+    "youtube":   { "enabled": true },
+    "tiktok":    { "enabled": false },
+    "snapchat":  { "enabled": true, "mode": "manual" }
+  },
+  "top_posts": 8
+}
