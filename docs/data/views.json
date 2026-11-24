@@ -1,126 +1,24 @@
 {
- "demo": true,
- "updated": "2026-11-23T15:03:06.752136+03:00",
+ "demo": false,
+ "updated": "2026-11-24T06:14:20.820659+03:00",
  "campaign": {
   "name": "المشاهدات المضمونة",
-  "start": "2026-11-12",
+  "start": "2026-12-01",
   "days": 30,
   "target": 1000000
  },
- "total": 477000,
- "platforms": {
-  "instagram": 248040,
-  "tiktok": 124020,
-  "youtube": 57240,
-  "snapchat": 47700
+ "total": 0,
+ "platforms": {},
+ "status": {
+  "instagram": {
+   "ok": false,
+   "at": "2026-11-24T06:14:20.820659+03:00"
+  },
+  "youtube": {
+   "ok": false,
+   "at": "2026-11-24T06:14:20.820659+03:00"
+  }
  },
- "status": {},
- "history": [
-  {
-   "date": "2026-11-12",
-   "total": 18000
-  },
-  {
-   "date": "2026-11-13",
-   "total": 44000
-  },
-  {
-   "date": "2026-11-14",
-   "total": 75000
-  },
-  {
-   "date": "2026-11-15",
-   "total": 97000
-  },
-  {
-   "date": "2026-11-16",
-   "total": 138000
-  },
-  {
-   "date": "2026-11-17",
-   "total": 176000
-  },
-  {
-   "date": "2026-11-18",
-   "total": 228000
-  },
-  {
-   "date": "2026-11-19",
-   "total": 275000
-  },
-  {
-   "date": "2026-11-20",
-   "total": 336000
-  },
-  {
-   "date": "2026-11-21",
-   "total": 380000
-  },
-  {
-   "date": "2026-11-22",
-   "total": 438000
-  },
-  {
-   "date": "2026-11-23",
-   "total": 477000
-  }
- ],
- "top": [
-  {
-   "platform": "instagram",
-   "type": "reel",
-   "title": "الفريق يشرح للمدير فكرة المشاهدات المضمونة",
-   "url": "",
-   "views": 142300
-  },
-  {
-   "platform": "tiktok",
-   "type": "video",
-   "title": "سألنا أصحاب المشاريع: كم تدفع على 100 ألف مشاهدة؟",
-   "url": "",
-   "views": 96800
-  },
-  {
-   "platform": "instagram",
-   "type": "reel",
-   "title": "جلسة تصوير وحدة = 4 منصات",
-   "url": "",
-   "views": 61250
-  },
-  {
-   "platform": "youtube",
-   "type": "short",
-   "title": "ما وصلنا الرقم؟ نكمل مجاناً",
-   "url": "",
-   "views": 40120
-  },
-  {
-   "platform": "snapchat",
-   "type": "story",
-   "title": "يوم 5 في الاستوديو",
-   "url": "",
-   "views": 28700
-  },
-  {
-   "platform": "instagram",
-   "type": "story",
-   "title": "كم تتوقع سعر مليون مشاهدة؟",
-   "url": "",
-   "views": 22950
-  },
-  {
-   "platform": "tiktok",
-   "type": "video",
-   "title": "ترند الأسبوع بنكهة ليمون",
-   "url": "",
-   "views": 19400
-  },
-  {
-   "platform": "instagram",
-   "type": "carousel_album",
-   "title": "ليش تدفع على فيديو؟",
-   "url": "",
-   "views": 15880
-  }
- ]
+ "history": [],
+ "top": []
 }
