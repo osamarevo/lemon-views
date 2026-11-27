@@ -4,13 +4,13 @@
  "status": {
   "instagram": {
    "ok": false,
-   "at": "2026-11-27T01:14:16.582670+03:00",
+   "at": "2026-11-27T07:54:39.517123+03:00",
    "error": "IG_USER_ID / IG_ACCESS_TOKEN not set",
    "last_ok": null
   },
   "youtube": {
    "ok": false,
-   "at": "2026-11-27T01:14:16.582670+03:00",
+   "at": "2026-11-27T07:54:39.517123+03:00",
    "error": "YT_API_KEY / YT_CHANNEL_ID not set",
    "last_ok": null
   }
